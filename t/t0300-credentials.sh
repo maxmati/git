@@ -484,7 +484,6 @@ test_expect_success 'credential config with partial URLs' '
 		-c credential.with%0anewline.username=uh-oh \
 		credential fill <stdin >stdout 2>stderr &&
 	test_i18ngrep "skipping credential lookup for key" stderr
-
 '
 
 test_done
