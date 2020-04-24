@@ -358,7 +358,7 @@ static int push_with_options(struct transport *transport, struct refspec *rs,
 	}
 
 	if (verbosity > 0)
-		fprintf(stderr, _("Pushing to %s\n"), transport->url);
+		fprintf(stderr, _("Pushing to %s\n"), anon_url);
 	trace2_region_enter("push", "transport_push", the_repository);
 	err = transport_push(the_repository, transport,
 			     rs, flags, &reject_reasons);
