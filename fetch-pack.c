@@ -1287,6 +1287,7 @@ static int process_acks(struct fetch_negotiator *negotiator,
 
 		if (skip_prefix(reader->line, "ACK ", &arg)) {
 			struct object_id oid;
+			received_ack = 1;
 			if (!get_oid_hex(arg, &oid)) {
 				struct commit *commit;
 				oidset_insert(common, &oid);
