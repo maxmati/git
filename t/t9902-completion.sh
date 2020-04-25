@@ -1351,6 +1351,13 @@ test_expect_failure 'git switch - with -C and --no-track, complete all reference
 	EOF
 '
 
+# TODO: completion does not yet recognize --orphan
+test_expect_failure 'git switch - with --orphan, do not complete anything' '
+	test_completion "git switch --orphan " <<-\EOF
+
+	EOF
+'
+
 test_expect_success 'teardown after ref completion' '
 	git branch -d matching-branch &&
 	git tag -d matching-tag &&
