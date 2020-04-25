@@ -1754,6 +1754,7 @@ int config_with_options(config_fn_t fn, void *data,
 			const struct config_options *opts)
 {
 	struct config_include_data inc = CONFIG_INCLUDE_INIT;
+	const char* env_config = getenv(CONFIG_ENVIRONMENT);
 
 	if (opts->respect_includes) {
 		inc.fn = fn;
@@ -1776,6 +1777,8 @@ int config_with_options(config_fn_t fn, void *data,
 		return git_config_from_file(fn, config_source->file, data);
 	else if (config_source && config_source->blob)
 		return git_config_from_blob_ref(fn, config_source->blob, data);
+	else if (env_config)
+		return git_config_from_file(fn, env_config, data);
 
 	return do_git_config_sequence(opts, fn, data);
 }

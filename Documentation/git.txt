@@ -882,6 +882,10 @@ standard output.
 	adequate and support for it is likely to be removed in the
 	foreseeable future (along with the variable).
 
+GIT_CONFIG::
+	Take the configuration from the given file instead of using typical
+	resolve mechanism.
+
 Discussion[[Discussion]]
 ------------------------
 

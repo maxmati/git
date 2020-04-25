@@ -46,4 +46,24 @@ test_expect_success 'listing and asking for variables are exclusive' '
 	test_must_fail git var -l GIT_COMMITTER_IDENT
 '
 
+
+cat > config_file << EOF
+[ein]
+	bahn = strasse
+EOF
+
+test_expect_success 'respect GIT_CONFIG' '
+	GIT_CONFIG=$(pwd)/config_file git var -l >actual &&
+	echo strasse >expect &&
+	sed -n s/ein\\.bahn=//p <actual >actual.bahn &&
+	test_cmp expect actual.bahn
+'
+
+test_expect_success 'GIT_CONFIG leads to not existsing file' '
+	test_when_finished "sane_unset GIT_CONFIG" &&
+	GIT_CONFIG=$(pwd)/not_existsing_config_file &&
+	export GIT_CONFIG &&
+	test_must_fail git var -l
+'
+
 test_done
